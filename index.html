@@ -5,213 +5,248 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mastermind - Code Breaker</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
 
     <main class="game">
 
-        <header class="header">
-            <h1>MASTER<span>MIND</span></h1>
-        </header>
+        <!-- SCHERMATA INIZIALE -->
+        <section id="schermataIniziale">
 
-        <section class="stats">
-            <div class="stat">
-                <span>TENTATIVO</span>
-                <strong>01 / 10</strong>
-            </div>
+            <header class="header">
+                <h1>MASTER<span>MIND</span></h1>
+            </header>
 
-            <div class="stat">
-                <span>TEMPO</span>
-                <strong>00:00</strong>
-            </div>
+            <section class="controls">
+                <h2>CODE BREAKER</h2>
+                <p>Trova la combinazione segreta!</p>
 
-            <div class="stat">
-                <span>RECORD</span>
-                <strong>—</strong>
-            </div>
+                <div class="buttons">
+                    <button class="primary" id="nuovaPartita">
+                        Nuova partita →
+                    </button>
+                </div>
+
+                <p id="messaggio"></p>
+            </section>
+
         </section>
 
-        <section class="board">
+        <!-- SCHERMATA DI GIOCO -->
+        <section id="schermataGioco" hidden>
 
-            <div class="secret">
-                <div class="secret-info">
-                    <h2>CODICE SEGRETO</h2>
-                    <p>Trova la combinazione</p>
+            <header class="header">
+                <h1>MASTER<span>MIND</span></h1>
+            </header>
+
+            <section class="stats">
+                <div class="stat">
+                    <span>TENTATIVO</span>
+                    <strong id="tentativo">01 / 10</strong>
                 </div>
 
-                <div class="secret-slots">
-                    <div class="secret-slot"></div>
-                    <div class="secret-slot"></div>
-                    <div class="secret-slot"></div>
-                    <div class="secret-slot"></div>
-                </div>
-            </div>
-
-            <div class="attempts">
-
-                <div class="attempt active">
-                    <span class="number">01</span>
-                    <div class="pegs">
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                    </div>
-                    <div class="feedback">
-                        <i></i><i></i><i></i><i></i>
-                    </div>
+                <div class="stat">
+                    <span>TEMPO</span>
+                    <strong id="tempo">00:00</strong>
                 </div>
 
-                <div class="attempt">
-                    <span class="number">02</span>
-                    <div class="pegs">
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
+                <div class="stat">
+                    <span>RECORD</span>
+                    <strong id="record">—</strong>
+                </div>
+            </section>
+
+            <section class="board">
+
+                <div class="secret">
+                    <div class="secret-info">
+                        <h2>CODICE SEGRETO</h2>
+                        <p>Trova la combinazione</p>
                     </div>
-                    <div class="feedback">
-                        <i></i><i></i><i></i><i></i>
+
+                    <div class="secret-slots">
+                        <div class="secret-slot"></div>
+                        <div class="secret-slot"></div>
+                        <div class="secret-slot"></div>
+                        <div class="secret-slot"></div>
                     </div>
                 </div>
 
-                <div class="attempt">
-                    <span class="number">03</span>
-                    <div class="pegs">
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
+                <div class="attempts">
+
+                    <div class="attempt active">
+                        <span class="number">01</span>
+                        <div class="pegs">
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                        </div>
+                        <div class="feedback">
+                            <i></i><i></i><i></i><i></i>
+                        </div>
                     </div>
-                    <div class="feedback">
-                        <i></i><i></i><i></i><i></i>
+
+                    <div class="attempt">
+                        <span class="number">02</span>
+                        <div class="pegs">
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                        </div>
+                        <div class="feedback">
+                            <i></i><i></i><i></i><i></i>
+                        </div>
                     </div>
+
+                    <div class="attempt">
+                        <span class="number">03</span>
+                        <div class="pegs">
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                        </div>
+                        <div class="feedback">
+                            <i></i><i></i><i></i><i></i>
+                        </div>
+                    </div>
+
+                    <div class="attempt">
+                        <span class="number">04</span>
+                        <div class="pegs">
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                        </div>
+                        <div class="feedback">
+                            <i></i><i></i><i></i><i></i>
+                        </div>
+                    </div>
+
+                    <div class="attempt">
+                        <span class="number">05</span>
+                        <div class="pegs">
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                        </div>
+                        <div class="feedback">
+                            <i></i><i></i><i></i><i></i>
+                        </div>
+                    </div>
+
+                    <div class="attempt">
+                        <span class="number">06</span>
+                        <div class="pegs">
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                        </div>
+                        <div class="feedback">
+                            <i></i><i></i><i></i><i></i>
+                        </div>
+                    </div>
+
+                    <div class="attempt">
+                        <span class="number">07</span>
+                        <div class="pegs">
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                        </div>
+                        <div class="feedback">
+                            <i></i><i></i><i></i><i></i>
+                        </div>
+                    </div>
+
+                    <div class="attempt">
+                        <span class="number">08</span>
+                        <div class="pegs">
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                        </div>
+                        <div class="feedback">
+                            <i></i><i></i><i></i><i></i>
+                        </div>
+                    </div>
+
+                    <div class="attempt">
+                        <span class="number">09</span>
+                        <div class="pegs">
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                        </div>
+                        <div class="feedback">
+                            <i></i><i></i><i></i><i></i>
+                        </div>
+                    </div>
+
+                    <div class="attempt">
+                        <span class="number">10</span>
+                        <div class="pegs">
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                            <div class="peg"></div>
+                        </div>
+                        <div class="feedback">
+                            <i></i><i></i><i></i><i></i>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="controls">
+
+                <h2>01 — SCEGLI UN COLORE</h2>
+
+                <div class="palette">
+                    <div class="color red"></div>
+                    <div class="color blue"></div>
+                    <div class="color green"></div>
+                    <div class="color yellow"></div>
+                    <div class="color purple"></div>
+                    <div class="color orange"></div>
+                    <div class="color pink"></div>
+                    <div class="color cyan"></div>
                 </div>
 
-                <div class="attempt">
-                    <span class="number">04</span>
-                    <div class="pegs">
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                    </div>
-                    <div class="feedback">
-                        <i></i><i></i><i></i><i></i>
-                    </div>
+                <h2>02 — COMPLETA LA COMBINAZIONE</h2>
+
+                <div class="buttons">
+                    <button class="secondary" id="cancella">
+                        Cancella
+                    </button>
+
+                    <button class="primary" id="conferma">
+                        Conferma tentativo →
+                    </button>
                 </div>
 
-                <div class="attempt">
-                    <span class="number">05</span>
-                    <div class="pegs">
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                    </div>
-                    <div class="feedback">
-                        <i></i><i></i><i></i><i></i>
-                    </div>
-                </div>
+            </section>
 
-                <div class="attempt">
-                    <span class="number">06</span>
-                    <div class="pegs">
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                    </div>
-                    <div class="feedback">
-                        <i></i><i></i><i></i><i></i>
-                    </div>
-                </div>
+            <footer class="legend">
+                <span><i class="correct"></i> Posizione corretta</span>
+                <span><i class="misplaced"></i> Colore corretto</span>
+            </footer>
 
-                <div class="attempt">
-                    <span class="number">07</span>
-                    <div class="pegs">
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                    </div>
-                    <div class="feedback">
-                        <i></i><i></i><i></i><i></i>
-                    </div>
-                </div>
+            <footer class="footer">
+                <p><center>@ sito a scopo didattico. ITIS Paleocapa BG</center></p>
+            </footer>
 
-                <div class="attempt">
-                    <span class="number">08</span>
-                    <div class="pegs">
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                    </div>
-                    <div class="feedback">
-                        <i></i><i></i><i></i><i></i>
-                    </div>
-                </div>
-
-                <div class="attempt">
-                    <span class="number">09</span>
-                    <div class="pegs">
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                    </div>
-                    <div class="feedback">
-                        <i></i><i></i><i></i><i></i>
-                    </div>
-                </div>
-
-                <div class="attempt">
-                    <span class="number">10</span>
-                    <div class="pegs">
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                        <div class="peg"></div>
-                    </div>
-                    <div class="feedback">
-                        <i></i><i></i><i></i><i></i>
-                    </div>
-                </div>
-
-            </div>
         </section>
-
-        <section class="controls">
-            <h2>01 — SCEGLI UN COLORE</h2>
-
-            <div class="palette">
-                <div class="color red"></div>
-                <div class="color blue"></div>
-                <div class="color green"></div>
-                <div class="color yellow"></div>
-                <div class="color purple"></div>
-                <div class="color orange"></div>
-                <div class="color pink"></div>
-                <div class="color cyan"></div>
-            </div>
-
-            <h2>02 — COMPLETA LA COMBINAZIONE</h2>
-
-            <div class="buttons">
-                <button class="secondary">Cancella</button>
-                <button class="primary">Conferma tentativo →</button>
-            </div>
-        </section>
-
-        <footer class="legend">
-            <span><i class="correct"></i> Posizione corretta</span>
-            <span><i class="misplaced"></i> Colore corretto</span>
-        </footer>
-
-        <footer class="footer">
-            <i aria-hidden="true"><p><center>@ sito a scopo didattico. ITIS Paleocapa BG</center></p></i>
-        </footer>
 
     </main>
 
