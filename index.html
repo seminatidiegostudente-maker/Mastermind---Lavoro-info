@@ -1,254 +1,184 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10131f">
     <title>Mastermind - Code Breaker</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <script src="master.js" defer></script>
 </head>
 <body>
+<main class="game">
 
-    <main class="game">
+    <section id="schermataIniziale">
+        <header class="header">
+            <p class="eyebrow">IL GIOCO LOGICO</p>
+            <h1>MASTER<span>MIND</span></h1>
+            <p class="subtitle">Metti alla prova la tua logica.</p>
+        </header>
 
-        <!-- SCHERMATA INIZIALE -->
-        <section id="schermataIniziale">
+        <section class="controls intro">
+            <h2>IL TUO PROFILO</h2>
+            <label for="nomeGiocatore">Nome giocatore</label>
+            <input id="nomeGiocatore" type="text"
+                   maxlength="24" placeholder="Inserisci il tuo nome"
+                   autocomplete="nickname">
 
-            <header class="header">
-                <h1>MASTER<span>MIND</span></h1>
-            </header>
+            <h2>CREA UNA PARTITA</h2>
+            <p>Genera un ID da condividere con l'altro giocatore.</p>
+            <button class="primary" id="nuovaPartita">
+                Crea nuova partita →
+            </button>
 
-            <section class="controls">
-                <h2>CODE BREAKER</h2>
-                <p>Trova la combinazione segreta!</p>
+            <div class="separator"></div>
 
-                <div class="buttons">
-                    <button class="primary" id="nuovaPartita">
-                        Nuova partita →
-                    </button>
-                </div>
+            <h2>ENTRA IN UNA PARTITA</h2>
+            <label for="idPartitaInput">ID della partita</label>
+            <input id="idPartitaInput" type="text"
+                   placeholder="Inserisci l'ID ricevuto"
+                   autocomplete="off">
 
-                <p id="messaggio"></p>
-            </section>
+            <button class="secondary full" id="entraPartita">
+                Entra nella partita
+            </button>
 
+            <p id="messaggio" class="message" role="status"
+               aria-live="polite"></p>
+        </section>
+    </section>
+
+    <section id="schermataGioco" hidden>
+        <header class="header">
+            <h1>MASTER<span>MIND</span></h1>
+            <p class="subtitle">Riesci a decifrare il codice?</p>
+        </header>
+
+        <section class="controls room">
+            <h2>PARTITA CONDIVISA</h2>
+            <p>Giocatore: <strong id="nomeVisualizzato">—</strong></p>
+            <p>ID partita: <strong id="idPartitaVisualizzato">—</strong></p>
+            <button class="secondary full" id="copiaId">
+                Copia ID partita
+            </button>
+            <p id="statoAccesso" class="message" role="status"></p>
         </section>
 
-        <!-- SCHERMATA DI GIOCO -->
-        <section id="schermataGioco" hidden>
-
-            <header class="header">
-                <h1>MASTER<span>MIND</span></h1>
-            </header>
-
-            <section class="stats">
-                <div class="stat">
-                    <span>TENTATIVO</span>
-                    <strong id="tentativo">01 / 10</strong>
-                </div>
-
-                <div class="stat">
-                    <span>TEMPO</span>
-                    <strong id="tempo">00:00</strong>
-                </div>
-
-                <div class="stat">
-                    <span>RECORD</span>
-                    <strong id="record">—</strong>
-                </div>
-            </section>
-
-            <section class="board">
-
-                <div class="secret">
-                    <div class="secret-info">
-                        <h2>CODICE SEGRETO</h2>
-                        <p>Trova la combinazione</p>
-                    </div>
-
-                    <div class="secret-slots">
-                        <div class="secret-slot"></div>
-                        <div class="secret-slot"></div>
-                        <div class="secret-slot"></div>
-                        <div class="secret-slot"></div>
-                    </div>
-                </div>
-
-                <div class="attempts">
-
-                    <div class="attempt active">
-                        <span class="number">01</span>
-                        <div class="pegs">
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                        </div>
-                        <div class="feedback">
-                            <i></i><i></i><i></i><i></i>
-                        </div>
-                    </div>
-
-                    <div class="attempt">
-                        <span class="number">02</span>
-                        <div class="pegs">
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                        </div>
-                        <div class="feedback">
-                            <i></i><i></i><i></i><i></i>
-                        </div>
-                    </div>
-
-                    <div class="attempt">
-                        <span class="number">03</span>
-                        <div class="pegs">
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                        </div>
-                        <div class="feedback">
-                            <i></i><i></i><i></i><i></i>
-                        </div>
-                    </div>
-
-                    <div class="attempt">
-                        <span class="number">04</span>
-                        <div class="pegs">
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                        </div>
-                        <div class="feedback">
-                            <i></i><i></i><i></i><i></i>
-                        </div>
-                    </div>
-
-                    <div class="attempt">
-                        <span class="number">05</span>
-                        <div class="pegs">
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                        </div>
-                        <div class="feedback">
-                            <i></i><i></i><i></i><i></i>
-                        </div>
-                    </div>
-
-                    <div class="attempt">
-                        <span class="number">06</span>
-                        <div class="pegs">
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                        </div>
-                        <div class="feedback">
-                            <i></i><i></i><i></i><i></i>
-                        </div>
-                    </div>
-
-                    <div class="attempt">
-                        <span class="number">07</span>
-                        <div class="pegs">
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                        </div>
-                        <div class="feedback">
-                            <i></i><i></i><i></i><i></i>
-                        </div>
-                    </div>
-
-                    <div class="attempt">
-                        <span class="number">08</span>
-                        <div class="pegs">
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                        </div>
-                        <div class="feedback">
-                            <i></i><i></i><i></i><i></i>
-                        </div>
-                    </div>
-
-                    <div class="attempt">
-                        <span class="number">09</span>
-                        <div class="pegs">
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                        </div>
-                        <div class="feedback">
-                            <i></i><i></i><i></i><i></i>
-                        </div>
-                    </div>
-
-                    <div class="attempt">
-                        <span class="number">10</span>
-                        <div class="pegs">
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                            <div class="peg"></div>
-                        </div>
-                        <div class="feedback">
-                            <i></i><i></i><i></i><i></i>
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <section class="controls">
-
-                <h2>01 — SCEGLI UN COLORE</h2>
-
-                <div class="palette">
-                    <div class="color red"></div>
-                    <div class="color blue"></div>
-                    <div class="color green"></div>
-                    <div class="color yellow"></div>
-                    <div class="color purple"></div>
-                    <div class="color orange"></div>
-                    <div class="color pink"></div>
-                    <div class="color cyan"></div>
-                </div>
-
-                <h2>02 — COMPLETA LA COMBINAZIONE</h2>
-
-                <div class="buttons">
-                    <button class="secondary" id="cancella">
-                        Cancella
-                    </button>
-
-                    <button class="primary" id="conferma">
-                        Conferma tentativo →
-                    </button>
-                </div>
-
-            </section>
-
-            <footer class="legend">
-                <span><i class="correct"></i> Posizione corretta</span>
-                <span><i class="misplaced"></i> Colore corretto</span>
-            </footer>
-
-            <footer class="footer">
-                <p><center>@ sito a scopo didattico. ITIS Paleocapa BG</center></p>
-            </footer>
-
+        <section class="stats">
+            <div class="stat">
+                <span>TENTATIVO</span>
+                <strong id="tentativo">01 / 10</strong>
+            </div>
+            <div class="stat">
+                <span>TEMPO</span>
+                <strong id="tempo">00:00</strong>
+            </div>
+            <div class="stat">
+                <span>MIGLIOR RECORD</span>
+                <strong id="record">—</strong>
+            </div>
         </section>
 
-    </main>
+        <section class="board" id="tabellonePersonale">
+            <div class="secret">
+                <div class="secret-info">
+                    <h2>IL TUO TABELLONE</h2>
+                    <p id="statoCodice">Indovina la combinazione</p>
+                </div>
+                <div class="secret-slots">
+                    <div class="secret-slot"></div>
+                    <div class="secret-slot"></div>
+                    <div class="secret-slot"></div>
+                    <div class="secret-slot"></div>
+                </div>
+            </div>
+            <div class="attempts" id="righePersonali"></div>
+        </section>
 
+        <section class="board opponent-board" id="tabelloneAvversario">
+            <div class="secret-info">
+                <h2>TABELLONE AVVERSARIO</h2>
+                <p id="statoAvversario">
+                    In attesa delle mosse dell'avversario...
+                </p>
+            </div>
+            <div class="attempts" id="righeAvversario"></div>
+        </section>
+
+        <section class="controls">
+            <h2>01 — SCEGLI UN COLORE</h2>
+
+            <div class="palette">
+                <button class="color red" data-color="red" aria-label="Rosso"></button>
+                <button class="color blue" data-color="blue" aria-label="Blu"></button>
+                <button class="color green" data-color="green" aria-label="Verde"></button>
+                <button class="color yellow" data-color="yellow" aria-label="Giallo"></button>
+                <button class="color purple" data-color="purple" aria-label="Viola"></button>
+                <button class="color orange" data-color="orange" aria-label="Arancione"></button>
+                <button class="color pink" data-color="pink" aria-label="Rosa"></button>
+                <button class="color cyan" data-color="cyan" aria-label="Ciano"></button>
+            </div>
+
+            <h2>02 — COMPLETA LA COMBINAZIONE</h2>
+
+            <div class="buttons">
+                <button class="secondary" id="cancella">Cancella</button>
+                <button class="primary" id="conferma">
+                    Conferma tentativo →
+                </button>
+            </div>
+
+            <p id="messaggioGioco" class="message" role="status"
+               aria-live="polite"></p>
+        </section>
+
+        <div class="legend">
+            <span><i class="correct"></i> Posizione corretta</span>
+            <span><i class="misplaced"></i> Colore corretto, posizione errata</span>
+        </div>
+
+        <button class="secondary restart" id="tornaInizio">
+            Torna alla schermata iniziale
+        </button>
+
+        <footer class="footer">
+            Sito a scopo didattico · ITIS Paleocapa BG
+        </footer>
+    </section>
+</main>
+
+<script>
+    function creaRigheTabellone(contenitoreId) {
+        const contenitore = document.getElementById(contenitoreId);
+
+        for (let numero = 1; numero <= 10; numero++) {
+            const riga = document.createElement("div");
+            riga.className = "attempt";
+
+            if (numero === 1 && contenitoreId === "righePersonali") {
+                riga.classList.add("active");
+            }
+
+            riga.innerHTML = `
+                <span class="number">${String(numero).padStart(2, "0")}</span>
+                <div class="pegs">
+                    <button class="peg" aria-label="Posizione 1"></button>
+                    <button class="peg" aria-label="Posizione 2"></button>
+                    <button class="peg" aria-label="Posizione 3"></button>
+                    <button class="peg" aria-label="Posizione 4"></button>
+                </div>
+                <div class="feedback">
+                    <i></i><i></i><i></i><i></i>
+                </div>
+            `;
+
+            contenitore.appendChild(riga);
+        }
+    }
+
+    creaRigheTabellone("righePersonali");
+    creaRigheTabellone("righeAvversario");
+</script>
 </body>
 </html>
