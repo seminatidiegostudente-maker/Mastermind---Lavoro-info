@@ -709,4 +709,4 @@ pulsanteTorna.addEventListener("click", () => {
 // ============================================
 
 caricaRecord();
-aggiornaTempo();
+aggiornaTempo()
